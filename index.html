@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>A Date With Yourself</title>
+</head>
+<link href="https://fonts.googleapis.com/css?family=Barlow" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<style type="text/css">
+	html,body{
+		font-family: Barlow;
+		color:rgb(240,0,120);
+		padding:14vmin;
+		text-align: center;
+		font-size: 1.2em;
+		overflow:hidden;
+	}
+	button{
+		width:20vw;
+		padding:15px;
+		color:white;
+		background-color: rgb(240,0,120);
+		border:0;
+		border-radius: 40px;
+		font-size: 0.8em;
+		cursor: pointer;
+		transition: 0.2s all;
+		outline: none;
+
+
+	}
+	button:hover{
+		background-color: navy;
+		transition: 0.2s all;
+	}
+	.checkbox-grid li {
+    display: block;
+    float: left;
+    width: 25%;
+    padding:9px 0px;
+
+}
+.footer{
+	position: absolute;
+	bottom:10px;
+	right:-100px;
+
+}
+.footer img{
+	width:25%;
+}
+audio{
+	opacity: 0;
+}
+.btn{
+	margin: 15px;
+}
+#dwnld{
+	position: absolute;
+	top:30px;
+	visibility: hidden;
+	right:50px;
+	cursor: pointer;
+	font-weight: bold;
+	background-color: yellow;
+	color:black;
+}
+.recording,.recording:hover{
+	background-color: yellow;
+	color:black;
+}
+
+</style>
+<body>
+	<div id="replacable">
+<h1>Hi Ashris!</h1>
+<h3>Let's schedule some time for you to spend with yourself.</h3>
+<p>&nbsp;</p>
+<button onclick="go();">Let's Go</button>
+</div>
+<div class="footer">
+	<img src="fi.jpeg">
+</div>
+<div id="dwnld">
+	 <div onclick="download();"><a href="audio/audio1.mp3" download="Podcast_Date.mp3"> ↓ PODCAST</a></div>
+</div>
+<audio id="audio" controls="controls">
+  <source id="audioSource" src=""></source>
+  Your browser does not support the audio format.
+</audio>
+</body>
+<script type="text/javascript">
+	function go(){
+		document.getElementById('replacable').innerHTML='<h2>What are the topics you want to discuss with yourself?</h2><ul class="checkbox-grid"><li><input type="checkbox" name="text1" value="value1" /><label for="text1">Friends</label></li><li><input type="checkbox" name="text2" value="value2" /><label for="text2">Feelings</label></li><li><input type="checkbox" name="text3" value="value3" /><label for="text3">Fun</label></li> <li><input type="checkbox" name="text4" value="value4" /><label for="text4">Love</label></li><li><input type="checkbox" name="text5" value="value5" /><label for="text5">Life</label></li><li><input type="checkbox" name="text6" value="value6" /><label for="text6">Music</label></li><li><input type="checkbox" name="text7" value="value7" /><label for="text7">Gossip</label></li><li><input type="checkbox" name="text8" value="value8" /><label for="text8">Career</label></li></ul><p>&nbsp;</p><button onclick="pgo();">Launch</button>';
+	}
+	function pgo(){
+		document.getElementById('replacable').innerHTML="<img class='loading' src='loading.gif'>";
+		var timer=setTimeout(function(){
+document.getElementById('replacable').innerHTML="playing..."
+			changeClip();
+		},3000);
+	}
+	var clipid=0;
+var clips=[{"src":"audio/audio1.mp3","to":"Ashris","at":"Now","tr":"Hi Ashris. I am glad you could make it to our date. Feel free, let's take a stroll as I narrate my story to you."},
+{"src":"audio/audio2.mp3","to":"Kartik","at":"Wednesday, 31 May 2017 at 13:56 EDT","tr":"I randomly messaged a person from Chile yesterday saying i want to be best friends with them"},
+{"src":"audio/audio3.mp3","to":"Priyancy","at":"Monday, 5 June 2017 at 12:33 EDT","tr":"I want my friends to be just mine. One reason I give up on people is that I feel I won't be important to them anymore"},
+{"src":"audio/audio4.mp3","to":"Kartik","at":"Wednesday, 19 April 2017 at 11:42 EDT","tr":"make enemies worthy of trust, enemies who you respect and who respect you back. They are more important than friends. They help you define who you are and who you stand with."},
+{"src":"audio/audio5.mp3","to":"Keerthana","at":"Friday, 31 May 2013 at 16:22 EDT","tr":"What happens in everybody's life shapes their thinking.. I have mine which isn't all that pleasant which I didn't share with you on my birthday.. I just wish to imagine that I have very good friends around me and that includes u. It may be an illusion but let it be. illusions feel good."},
+{"src":"audio/audio6.mp3","to":"Divya Roop","at":"Saturday, 23 May 2015 at 16:02 EDT","tr":"Yeah, I did see your last status update. I don't know the specifics, but I just wish you will be strong through the struggle you are going through. You have inspired so many people and that does not mean you cannot be vulnerable and go weak at times. Wish you with strength, happiness and love :)"},
+{"src":"audio/audio7.mp3","to":"Kartik","at":"Sunday, 30 July 2017 at 16:42 EDT","tr":"We dont respect people anymore. We dont show love so often, this makes people want it more, do unnescessary things to become more rich, so that they can get more love."}];
+	function changeClip() {
+		document.getElementById('dwnld').style.visibility="visible";
+		if(clipid>=clips.length){
+			document.getElementById('replacable').innerHTML='<h6>To Ankita @ Saturday, 1 June 2013</h6><iframe width="560" height="315" src="https://www.youtube.com/embed/8inJtTG_DuU" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe><button class="btn" onclick="skipDemo();">Next</button><button class="btn" onclick="record();">Record</button>';
+		}
+audio = document.getElementById('audio');
+source = document.getElementById('audioSource');
+  source.src = clips[clipid].src;
+  audio.load(); //call this to just preload the audio without playing
+  document.getElementById('replacable').innerHTML='<h6>To '+clips[clipid].to+' @ '+clips[clipid].at+'</h6><p>'+clips[clipid].tr+'</p><button class="btn" onclick="changeClip();">Next</button><button class="btn record" onclick="record();">Record</button>';
+  audio.play(); //call this to play the song right away
+  clipid++;
+};
+function record(){
+	$('.record').toggleClass('recording');
+	$('.record').html('Record');
+	$('.recording').html('Recording');
+}
+function skipDemo(){
+source.src = 'audio/goodbye.mp3';
+  audio.load(); //call this to just preload the audio without playing
+  document.getElementById('replacable').innerHTML='It was nice having you on the date, Ashris. Hope to see you soon!';
+  audio.play(); //call this to play the song right away
+}
+</script>
+</html>
